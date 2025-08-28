@@ -11,7 +11,7 @@ git push -u origin main
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Kamille, Com Amor</title>
+    <title>Para Minha Kamille</title>
     <style>
         * {
             margin: 0;
@@ -204,6 +204,21 @@ git push -u origin main
             line-height: 1.5;
         }
 
+        .music-alert {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: 2px solid #ff4d94;
+            z-index: 100;
+            opacity: 0;
+            animation: fadeInOut 3s forwards;
+            display: none;
+        }
+
         @keyframes blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
@@ -211,6 +226,13 @@ git push -u origin main
 
         @keyframes fadeIn {
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { opacity: 0; display: none; }
         }
 
         @keyframes thinking {
@@ -236,6 +258,7 @@ git push -u origin main
     <div class="background"></div>
     <div class="overlay"></div>
     <div class="hearts" id="hearts"></div>
+    <div class="music-alert" id="music-alert">Clique em qualquer lugar para ativar a música</div>
 
     <div class="container">
         <div class="header">
@@ -250,7 +273,7 @@ git push -u origin main
         <button class="message-btn" id="surprise-btn">Meu Coração por Você</button>
         
         <div class="distance-message">
-            <p>Às vezes o amor não precisa do toque físico para ser real.<br> 
+            <p>Às vezes o amor não precisa do toporte físico para ser real.<br> 
             Ele vive nos olhos que brilham ao se conectarem,<br>
             no sorriso que aparece ao ouvir sua voz,<br>
             e no coração que bate mais forte ao saber que você existe.</p>
@@ -276,6 +299,7 @@ git push -u origin main
             const heartsToggle = document.getElementById('hearts-toggle');
             const backgroundMusic = document.getElementById('background-music');
             const heartsContainer = document.getElementById('hearts');
+            const musicAlert = document.getElementById('music-alert');
             
             // Textos para a "digitação" com hesitações e mudanças
             const messages = [
@@ -294,7 +318,19 @@ git push -u origin main
                 "Você ilumina meus dias de uma forma que ninguém mais consegue...",
                 "Eu amo cada momento que passamos juntos, mesmo que virtualmente...",
                 "E um dia, eu prometo que vamos nos encontrar...",
-                "Feliz aniversário, minha amor! Que seu dia seja tão incrível quanto você! 💖"
+                "Feliz aniversário, minha amor! Que seu dia seja tão incrível quanto você! 💖",
+                "Sabe, Kamille...",
+                "Nunca pensei que encontraria alguém como você...",
+                "Alguém que faz meu coração bater mais forte...",
+                "Alguém que me faz sorrir mesmo nos dias difíceis...",
+                "Você é minha inspiração...",
+                "Minha motivação para ser melhor a cada dia...",
+                "Eu sou realmente sortudo por te ter na minha vida...",
+                "Espero que este ano traga tudo de melhor para você...",
+                "Porque você merece o mundo inteiro...",
+                "E eu farei de tudo para ver você feliz...",
+                "Te amo mais do que palavras podem expressar...",
+                "Feliz aniversário, meu amor! 🎂🎉🎁"
             ];
             
             // Configurações
@@ -307,6 +343,7 @@ git push -u origin main
             let isPaused = false;
             let isThinking = false;
             let heartsActive = true;
+            let musicPlaying = false;
             
             // Iniciar efeito de digitação
             function typeWriter() {
@@ -424,18 +461,38 @@ git push -u origin main
             });
             
             // Controle de música
-            let musicPlaying = false;
             musicToggle.addEventListener('click', function() {
                 if (musicPlaying) {
                     backgroundMusic.pause();
                     musicToggle.textContent = '🔇';
                 } else {
                     backgroundMusic.play().catch(e => {
-                        console.log("Reprodução automática bloqueada. Clique para ativar o som.");
+                        console.log("Reprodução bloqueada. Clique na página para ativar o som.");
                     });
                     musicToggle.textContent = '🔊';
                 }
                 musicPlaying = !musicPlaying;
+            });
+            
+            // Tentar reproduzir música automaticamente
+            function tryPlayMusic() {
+                backgroundMusic.play().then(() => {
+                    musicPlaying = true;
+                    musicToggle.textContent = '🔊';
+                    musicAlert.style.display = 'none';
+                }).catch(e => {
+                    console.log("Reprodução automática bloqueada. Clique na página para ativar o som.");
+                    musicAlert.style.display = 'block';
+                    musicToggle.textContent = '🔇';
+                });
+            }
+            
+            // Clique em qualquer lugar para ativar a música
+            document.body.addEventListener('click', function() {
+                if (!musicPlaying) {
+                    tryPlayMusic();
+                    musicAlert.style.display = 'none';
+                }
             });
             
             // Controle de corações
@@ -475,30 +532,4 @@ git push -u origin main
                         // Remover após a animação
                         setTimeout(() => {
                             heart.remove();
-                        }, animationDuration * 1000);
-                    }, i * 300);
-                }
-            }
-            
-            // Criar corações continuamente
-            setInterval(() => {
-                createHearts(1);
-            }, 800);
-            
-            // Iniciar alguns corações imediatamente
-            createHearts(10);
-            
-            // Tentar reproduzir música automaticamente (pode ser bloqueado pelos navegadores)
-            setTimeout(() => {
-                backgroundMusic.play().then(() => {
-                    musicPlaying = true;
-                    musicToggle.textContent = '🔊';
-                }).catch(e => {
-                    console.log("Reprodução automática bloqueada. Clique para ativar o som.");
-                    musicToggle.textContent = '🔇';
-                });
-            }, 1000);
-        });
-    </script>
-</body>
-</html>
+         
