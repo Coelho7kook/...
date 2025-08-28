@@ -11,24 +11,21 @@ git push -u origin main
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Minha Kamille</title>
+    <title>Feliz Aniversário, Kamille!</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Courier New', monospace;
+            font-family: 'Arial', sans-serif;
         }
 
         body {
             background: #000;
             color: #fff;
             min-height: 100vh;
-            overflow: hidden;
+            overflow-x: hidden;
             position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         .background {
@@ -37,55 +34,44 @@ git push -u origin main
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: -2;
             background: url('vava.gif') center/cover no-repeat;
-            opacity: 0.8;
         }
 
         .overlay {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, rgba(0,0,0,0.2), rgba(0,0,0,0.8)), 
-                        linear-gradient(to bottom, rgba(80,0,80,0.4), rgba(20,0,40,0.6));
-            z-index: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(80,0,80,0.6));
+            z-index: -1;
         }
 
         .container {
-            position: relative;
-            z-index: 1;
             max-width: 900px;
-            width: 90%;
+            margin: 0 auto;
             padding: 2rem;
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .header {
-            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
         }
 
         h1 {
             font-size: 4rem;
-            margin-bottom: 1rem;
+            margin: 2rem 0;
             color: #ff4d94;
             text-shadow: 0 0 15px rgba(255, 77, 148, 0.8);
+            animation: fadeIn 2s forwards;
             opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 1.5s forwards 0.5s;
-            letter-spacing: 2px;
         }
 
         .subtitle {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: #f8bef8;
+            margin-bottom: 3rem;
+            animation: fadeIn 2s forwards 0.5s;
             opacity: 0;
-            animation: fadeIn 2s forwards 1s;
         }
 
         .typewriter-container {
@@ -93,10 +79,10 @@ git push -u origin main
             padding: 2.5rem;
             border-radius: 20px;
             box-shadow: 0 0 30px rgba(255, 105, 180, 0.6);
-            margin-bottom: 2rem;
+            margin: 2rem auto;
             width: 100%;
             border: 2px solid rgba(255, 105, 180, 0.4);
-            min-height: 350px;
+            min-height: 300px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -107,8 +93,7 @@ git push -u origin main
             line-height: 1.6;
             text-align: left;
             color: #fff;
-            min-height: 280px;
-            padding: 1rem;
+            min-height: 200px;
         }
 
         .cursor {
@@ -121,30 +106,6 @@ git push -u origin main
             vertical-align: middle;
         }
 
-        .thinking {
-            display: inline-block;
-            animation: thinking 1.5s infinite;
-            margin-left: 10px;
-        }
-
-        .hearts {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 2;
-            top: 0;
-            left: 0;
-        }
-
-        .heart {
-            position: absolute;
-            width: 24px;
-            height: 24px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff4d94"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') no-repeat center/contain;
-            opacity: 0;
-        }
-
         .message-btn {
             background: linear-gradient(45deg, #ff4d94, #cc00ff);
             border: none;
@@ -153,17 +114,26 @@ git push -u origin main
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
-            margin-top: 20px;
+            margin: 2rem 0;
             box-shadow: 0 0 20px rgba(255, 105, 180, 0.7);
             transition: all 0.3s;
+            animation: fadeIn 2s forwards 1s;
             opacity: 0;
-            animation: fadeIn 1s forwards 2s;
-            font-weight: bold;
         }
 
         .message-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 0 30px rgba(255, 105, 180, 0.9);
+        }
+
+        .distance-message {
+            margin-top: 2rem;
+            font-size: 1.8rem;
+            color: #d9a7f8;
+            text-align: center;
+            line-height: 1.6;
+            animation: fadeIn 3s forwards 2s;
+            opacity: 0;
         }
 
         .controls {
@@ -188,35 +158,22 @@ git push -u origin main
             transition: all 0.3s;
         }
 
-        .control-btn:hover {
-            transform: scale(1.1);
-            background: rgba(255, 105, 180, 0.9);
-        }
-
-        .distance-message {
-            margin-top: 2rem;
-            font-size: 1.8rem;
-            color: #d9a7f8;
-            opacity: 0;
-            animation: fadeIn 3s forwards 4s;
-            text-align: center;
-            max-width: 800px;
-            line-height: 1.5;
-        }
-
-        .music-alert {
+        .hearts-container {
             position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            padding: 10px 20px;
-            border-radius: 50px;
-            border: 2px solid #ff4d94;
-            z-index: 100;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .heart {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff4d94"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') no-repeat center/contain;
             opacity: 0;
-            animation: fadeInOut 3s forwards;
-            display: none;
         }
 
         @keyframes blink {
@@ -225,19 +182,7 @@ git push -u origin main
         }
 
         @keyframes fadeIn {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInOut {
-            0% { opacity: 0; }
-            20% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { opacity: 0; display: none; }
-        }
-
-        @keyframes thinking {
-            0%, 100% { opacity: 0.5; transform: translateY(0); }
-            50% { opacity: 1; transform: translateY(-5px); }
+            to { opacity: 1; }
         }
 
         @keyframes float {
@@ -249,7 +194,7 @@ git push -u origin main
         @media (max-width: 768px) {
             h1 { font-size: 2.8rem; }
             #typewriter-text { font-size: 1.8rem; }
-            .typewriter-container { padding: 1.8rem; min-height: 300px; }
+            .typewriter-container { padding: 1.8rem; min-height: 250px; }
             .distance-message { font-size: 1.5rem; }
         }
     </style>
@@ -257,23 +202,20 @@ git push -u origin main
 <body>
     <div class="background"></div>
     <div class="overlay"></div>
-    <div class="hearts" id="hearts"></div>
-    <div class="music-alert" id="music-alert">Clique em qualquer lugar para ativar a música</div>
+    <div class="hearts-container" id="hearts-container"></div>
 
     <div class="container">
-        <div class="header">
-            <h1>Feliz Aniversário, Kamille!</h1>
-            <p class="subtitle">De alguém que te ama mais que tudo</p>
-        </div>
+        <h1>Feliz Aniversário, Kamille!</h1>
+        <p class="subtitle">De alguém que te ama mais que tudo</p>
         
         <div class="typewriter-container">
-            <div id="typewriter-text"></div>
+            <div id="typewriter-text"><span class="cursor"></span></div>
         </div>
 
         <button class="message-btn" id="surprise-btn">Meu Coração por Você</button>
         
         <div class="distance-message">
-            <p>Às vezes o amor não precisa do toporte físico para ser real.<br> 
+            <p>Às vezes o amor não precisa do toque físico para ser real.<br> 
             Ele vive nos olhos que brilham ao se conectarem,<br>
             no sorriso que aparece ao ouvir sua voz,<br>
             e no coração que bate mais forte ao saber que você existe.</p>
@@ -287,249 +229,216 @@ git push -u origin main
 
     <audio id="background-music" loop>
         <source src="musica.mp3" type="audio/mp3">
-        Seu navegador não suporta áudio.
     </audio>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Elementos DOM
-            const typewriterText = document.getElementById('typewriter-text');
-            const surpriseBtn = document.getElementById('surprise-btn');
-            const musicToggle = document.getElementById('music-toggle');
-            const heartsToggle = document.getElementById('hearts-toggle');
-            const backgroundMusic = document.getElementById('background-music');
-            const heartsContainer = document.getElementById('hearts');
-            const musicAlert = document.getElementById('music-alert');
+        // Elementos DOM
+        const typewriterText = document.getElementById('typewriter-text');
+        const surpriseBtn = document.getElementById('surprise-btn');
+        const musicToggle = document.getElementById('music-toggle');
+        const heartsToggle = document.getElementById('hearts-toggle');
+        const backgroundMusic = document.getElementById('background-music');
+        const heartsContainer = document.getElementById('hearts-container');
+        
+        // Textos para a digitação
+        const messages = [
+            "Kamille... é seu aniversário hoje...",
+            "E eu queria te dizer tantas coisas...",
+            "Mas não sei bem por onde começar...",
+            "Você é a pessoa mais incrível que já conheci...",
+            "Seus olhos... como descrever seus olhos?",
+            "Eles são como... não, isso não é suficiente...",
+            "Seus olhos são como a lua refletindo nas águas tranquilas de um lago...",
+            "E seu sorriso... seu sorriso é magnético...",
+            "Só de pensar nele meu coração acelera...",
+            "Seu cabelo... é perfeito... tão suave...",
+            "Às vezes fico imaginando como seria tocá-lo...",
+            "Mas mesmo à distância, eu sinto sua presença...",
+            "Você ilumina meus dias de uma forma que ninguém mais consegue...",
+            "Eu amo cada momento que passamos juntos, mesmo que virtualmente...",
+            "E um dia, eu prometo que vamos nos encontrar...",
+            "Feliz aniversário, meu amor! Que seu dia seja tão incrível quanto você! 💖",
+            "Sabe, Kamille...",
+            "Nunca pensei que encontraria alguém como você...",
+            "Alguém que faz meu coração bater mais forte...",
+            "Alguém que me faz sorrir mesmo nos dias difíceis...",
+            "Você é minha inspiração...",
+            "Minha motivação para ser melhor a cada dia...",
+            "Eu sou realmente sortudo por te ter na minha vida...",
+            "Espero que este ano traga tudo de melhor para você...",
+            "Porque você merece o mundo inteiro...",
+            "E eu farei de tudo para ver você feliz...",
+            "Te amo mais do que palavras podem expressar...",
+            "Feliz aniversário, meu amor! 🎂🎉🎁"
+        ];
+        
+        // Configurações
+        let currentMessage = 0;
+        let currentText = '';
+        let isDeleting = false;
+        let isPaused = false;
+        let heartsActive = true;
+        let musicPlaying = false;
+        
+        // Iniciar efeito de digitação
+        function typeWriter() {
+            if (isPaused) return;
             
-            // Textos para a "digitação" com hesitações e mudanças
-            const messages = [
-                "Kamille... é seu aniversário hoje...",
-                "E eu queria te dizer tantas coisas...",
-                "Mas não sei bem por onde começar...",
-                "Você é a pessoa mais incrível que já conheci...",
-                "Seus olhos... como descrever seus olhos?",
-                "Eles são como... não, isso não é suficiente...",
-                "Seus olhos são como a lua refletindo nas águas tranquilas de um lago...",
-                "E seu sorriso... seu sorriso é magnético...",
-                "Só de pensar nele meu coração acelera...",
-                "Seu cabelo... é perfeito... tão suave...",
-                "Às vezes fico imaginando como seria tocá-lo...",
-                "Mas mesmo à distância, eu sinto sua presença...",
-                "Você ilumina meus dias de uma forma que ninguém mais consegue...",
-                "Eu amo cada momento que passamos juntos, mesmo que virtualmente...",
-                "E um dia, eu prometo que vamos nos encontrar...",
-                "Feliz aniversário, minha amor! Que seu dia seja tão incrível quanto você! 💖",
-                "Sabe, Kamille...",
-                "Nunca pensei que encontraria alguém como você...",
-                "Alguém que faz meu coração bater mais forte...",
-                "Alguém que me faz sorrir mesmo nos dias difíceis...",
-                "Você é minha inspiração...",
-                "Minha motivação para ser melhor a cada dia...",
-                "Eu sou realmente sortudo por te ter na minha vida...",
-                "Espero que este ano traga tudo de melhor para você...",
-                "Porque você merece o mundo inteiro...",
-                "E eu farei de tudo para ver você feliz...",
-                "Te amo mais do que palavras podem expressar...",
-                "Feliz aniversário, meu amor! 🎂🎉🎁"
-            ];
+            const fullText = messages[currentMessage];
             
-            // Configurações
-            let typeSpeed = 70;
-            let eraseSpeed = 30;
-            let pauseBetween = 1500;
-            let currentMessage = 0;
-            let currentText = '';
-            let isDeleting = false;
-            let isPaused = false;
-            let isThinking = false;
-            let heartsActive = true;
-            let musicPlaying = false;
-            
-            // Iniciar efeito de digitação
-            function typeWriter() {
-                if (isPaused) return;
-                
-                const fullText = messages[currentMessage];
-                
-                if (isDeleting) {
-                    // Modo de apagar
-                    currentText = fullText.substring(0, currentText.length - 1);
-                } else {
-                    // Modo de digitar
-                    currentText = fullText.substring(0, currentText.length + 1);
-                }
-                
-                // Inserir texto com cursor
-                typewriterText.innerHTML = currentText + '<span class="cursor"></span>' + (isThinking ? '<span class="thinking">...</span>' : '');
-                
-                // Velocidade de digitação variável (para parecer mais humano)
-                let typeDelay = isDeleting ? eraseSpeed : typeSpeed + Math.random() * 100;
-                
-                // Ocasionalmente cometer erros de digitação (efeito mais realista)
-                if (!isDeleting && currentText.length > 5 && Math.random() < 0.05) {
-                    typeDelay += 400;
-                    setTimeout(() => {
-                        // Adicionar e remover letra errada
-                        let wrongText = currentText;
-                        const wrongChar = String.fromCharCode(94 + Math.floor(Math.random() * 26)); // Caractere aleatório
-                        wrongText += wrongChar;
-                        typewriterText.innerHTML = wrongText + '<span class="cursor"></span>';
-                        
-                        setTimeout(() => {
-                            typewriterText.innerHTML = currentText + '<span class="cursor"></span>';
-                            setTimeout(typeWriter, 200);
-                        }, 200);
-                    }, 400);
-                    return;
-                }
-                
-                // Hesitações durante a digitação
-                if (!isDeleting && currentText.length > 3 && Math.random() < 0.08) {
-                    isPaused = true;
-                    isThinking = true;
-                    typewriterText.innerHTML = currentText + '<span class="cursor"></span><span class="thinking">...</span>';
-                    
-                    setTimeout(() => {
-                        isPaused = false;
-                        isThinking = false;
-                        setTimeout(typeWriter, 200);
-                    }, 1000 + Math.random() * 1500);
-                    return;
-                }
-                
-                // Quando terminar de digitar a mensagem atual
-                if (!isDeleting && currentText === fullText) {
-                    isPaused = true;
-                    setTimeout(() => {
-                        isPaused = false;
-                        isDeleting = true;
-                    }, pauseBetween);
-                } 
-                // Quando terminar de apagar a mensagem atual
-                else if (isDeleting && currentText === '') {
-                    isDeleting = false;
-                    currentMessage = (currentMessage + 1) % messages.length;
-                    typeDelay = 500;
-                    
-                    // Às vezes mudar de ideia e escolher outra mensagem
-                    if (Math.random() < 0.3 && currentMessage > 3) {
-                        currentMessage = Math.floor(Math.random() * messages.length);
-                    }
-                }
-                
-                setTimeout(typeWriter, typeDelay);
+            if (isDeleting) {
+                // Modo de apagar
+                currentText = fullText.substring(0, currentText.length - 1);
+            } else {
+                // Modo de digitar
+                currentText = fullText.substring(0, currentText.length + 1);
             }
             
-            // Iniciar o efeito de digitação após um breve delay
-            setTimeout(typeWriter, 1000);
+            // Inserir texto com cursor
+            typewriterText.innerHTML = currentText + '<span class="cursor"></span>';
             
-            // Botão de surpresa
-            surpriseBtn.addEventListener('click', function() {
-                createHearts(30);
-                
-                // Mensagem especial
-                const specialMessages = [
-                    "Eu te amo mais que palavras podem expressar!",
-                    "Seu sorriso é minha felicidade!",
-                    "Seus olhos são meus favoritos!",
-                    "Não vejo a hora de estar ao seu lado!",
-                    "Você é meu maior presente!",
-                    "Nossa conexão é única e especial!"
-                ];
-                
-                const randomMessage = specialMessages[Math.floor(Math.random() * specialMessages.length)];
-                
-                // Criar mensagem flutuante
-                const floatingMessage = document.createElement('div');
-                floatingMessage.textContent = randomMessage;
-                floatingMessage.style.position = 'fixed';
-                floatingMessage.style.top = '50%';
-                floatingMessage.style.left = '50%';
-                floatingMessage.style.transform = 'translate(-50%, -50%)';
-                floatingMessage.style.background = 'rgba(255, 105, 180, 0.9)';
-                floatingMessage.style.color = 'white';
-                floatingMessage.style.padding = '20px 40px';
-                floatingMessage.style.borderRadius = '50px';
-                floatingMessage.style.fontSize = '2rem';
-                floatingMessage.style.zIndex = '100';
-                floatingMessage.style.boxShadow = '0 0 30px rgba(255, 105, 180, 0.9)';
-                document.body.appendChild(floatingMessage);
+            // Velocidade de digitação variável
+            let typeDelay = isDeleting ? 30 : 70 + Math.random() * 100;
+            
+            // Ocasionalmente cometer erros de digitação
+            if (!isDeleting && currentText.length > 5 && Math.random() < 0.05) {
+                setTimeout(() => {
+                    let wrongText = currentText;
+                    const wrongChar = String.fromCharCode(94 + Math.floor(Math.random() * 26));
+                    wrongText += wrongChar;
+                    typewriterText.innerHTML = wrongText + '<span class="cursor"></span>';
+                    
+                    setTimeout(() => {
+                        typewriterText.innerHTML = currentText + '<span class="cursor"></span>';
+                        setTimeout(typeWriter, 200);
+                    }, 200);
+                }, 400);
+                return;
+            }
+            
+            // Hesitações durante a digitação
+            if (!isDeleting && currentText.length > 3 && Math.random() < 0.08) {
+                isPaused = true;
+                typewriterText.innerHTML = currentText + '<span class="cursor"></span>...';
                 
                 setTimeout(() => {
-                    document.body.removeChild(floatingMessage);
-                }, 3000);
-            });
-            
-            // Controle de música
-            musicToggle.addEventListener('click', function() {
-                if (musicPlaying) {
-                    backgroundMusic.pause();
-                    musicToggle.textContent = '🔇';
-                } else {
-                    backgroundMusic.play().catch(e => {
-                        console.log("Reprodução bloqueada. Clique na página para ativar o som.");
-                    });
-                    musicToggle.textContent = '🔊';
-                }
-                musicPlaying = !musicPlaying;
-            });
-            
-            // Tentar reproduzir música automaticamente
-            function tryPlayMusic() {
-                backgroundMusic.play().then(() => {
-                    musicPlaying = true;
-                    musicToggle.textContent = '🔊';
-                    musicAlert.style.display = 'none';
-                }).catch(e => {
-                    console.log("Reprodução automática bloqueada. Clique na página para ativar o som.");
-                    musicAlert.style.display = 'block';
-                    musicToggle.textContent = '🔇';
-                });
+                    isPaused = false;
+                    setTimeout(typeWriter, 200);
+                }, 1000 + Math.random() * 1500);
+                return;
             }
             
-            // Clique em qualquer lugar para ativar a música
-            document.body.addEventListener('click', function() {
-                if (!musicPlaying) {
-                    tryPlayMusic();
-                    musicAlert.style.display = 'none';
-                }
-            });
+            // Quando terminar de digitar a mensagem atual
+            if (!isDeleting && currentText === fullText) {
+                isPaused = true;
+                setTimeout(() => {
+                    isPaused = false;
+                    isDeleting = true;
+                    setTimeout(typeWriter, 500);
+                }, 1500);
+                return;
+            } 
             
-            // Controle de corações
-            heartsToggle.addEventListener('click', function() {
-                heartsActive = !heartsActive;
-                heartsToggle.textContent = heartsActive ? '💖' : '🤍';
-                if (heartsActive) createHearts(10);
-            });
+            // Quando terminar de apagar a mensagem atual
+            if (isDeleting && currentText === '') {
+                isDeleting = false;
+                currentMessage = (currentMessage + 1) % messages.length;
+                setTimeout(typeWriter, 500);
+                return;
+            }
             
-            // Criar corações animados
-            function createHearts(count) {
-                if (!heartsActive) return;
-                
-                for (let i = 0; i < count; i++) {
+            setTimeout(typeWriter, typeDelay);
+        }
+        
+        // Iniciar o efeito de digitação
+        setTimeout(typeWriter, 1000);
+        
+        // Botão de surpresa
+        surpriseBtn.addEventListener('click', function() {
+            createHearts(20);
+        });
+        
+        // Controle de música
+        musicToggle.addEventListener('click', function() {
+            if (musicPlaying) {
+                backgroundMusic.pause();
+                musicToggle.textContent = '🔇';
+            } else {
+                backgroundMusic.play();
+                musicToggle.textContent = '🔊';
+            }
+            musicPlaying = !musicPlaying;
+        });
+        
+        // Tentar reproduzir música automaticamente
+        function tryPlayMusic() {
+            backgroundMusic.play()
+                .then(() => {
+                    musicPlaying = true;
+                    musicToggle.textContent = '🔊';
+                })
+                .catch(error => {
+                    console.log("Reprodução automática bloqueada: ", error);
+                    musicToggle.textContent = '🔇';
+                });
+        }
+        
+        // Clique em qualquer lugar para ativar a música
+        document.addEventListener('click', function() {
+            if (!musicPlaying) {
+                tryPlayMusic();
+            }
+        });
+        
+        // Controle de corações
+        heartsToggle.addEventListener('click', function() {
+            heartsActive = !heartsActive;
+            heartsToggle.textContent = heartsActive ? '💖' : '🤍';
+            if (heartsActive) createHearts(10);
+        });
+        
+        // Criar corações animados
+        function createHearts(count) {
+            if (!heartsActive) return;
+            
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart');
+                    
+                    // Posição aleatória na parte inferior
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.bottom = '0px';
+                    
+                    // Tamanho aleatório
+                    const size = 20 + Math.random() * 30;
+                    heart.style.width = size + 'px';
+                    heart.style.height = size + 'px';
+                    
+                    heartsContainer.appendChild(heart);
+                    
+                    // Animação
+                    const animationDuration = 4 + Math.random() * 5;
+                    heart.style.animation = `float ${animationDuration}s ease-in forwards`;
+                    
+                    // Remover após a animação
                     setTimeout(() => {
-                        const heart = document.createElement('div');
-                        heart.classList.add('heart');
-                        
-                        // Posição aleatória na parte inferior
-                        const startPosition = Math.random() * 100;
-                        heart.style.left = `${startPosition}%`;
-                        heart.style.bottom = '0px';
-                        
-                        // Tamanho aleatório
-                        const size = 20 + Math.random() * 30;
-                        heart.style.width = `${size}px`;
-                        heart.style.height = `${size}px`;
-                        
-                        heartsContainer.appendChild(heart);
-                        
-                        // Animação
-                        const animationDuration = 4 + Math.random() * 5;
-                        heart.style.animation = `
-                            float ${animationDuration}s ease-in forwards
-                        `;
-                        
-                        // Remover após a animação
-                        setTimeout(() => {
-                            heart.remove();
-         
+                        heart.remove();
+                    }, animationDuration * 1000);
+                }, i * 300);
+            }
+        }
+        
+        // Criar corações continuamente
+        setInterval(() => {
+            createHearts(1);
+        }, 800);
+        
+        // Iniciar alguns corações
+        createHearts(5);
+        
+        // Tentar reproduzir música automaticamente após um delay
+        setTimeout(tryPlayMusic, 1000);
+    </script>
+</body>
+</html>  
